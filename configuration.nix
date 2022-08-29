@@ -4,7 +4,7 @@
   users.users.itsbth = {
     home = "/Users/itsbth";
     # desc = "Bjørn Tore Håvie";
-    shell = pkgs.zsh;
+    /* shell = pkgs.zsh; */
   };
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget

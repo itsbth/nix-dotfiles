@@ -15,10 +15,14 @@
     glab
 
     ripgrep
+    coreutils-prefixed
+    gnupg
+    jq
 
     glow
     mdcat
   ];
+
   home.file.".config/nvim" = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Code/github.com/itsbth/dotfiles/nvim/.config/nvim";
   };
@@ -30,6 +34,16 @@
     delta = {
       enable = true;
     };
+    ignores = [ ".vim" ".direnv" ];
+    includes = [
+      {
+        path = pkgs.writeText "personal.inc" ''
+          [user]
+            email = itsbth@itsbth.com
+        '';
+        condition = "gitdir:~/Code/github.com/itsbth/";
+      }
+    ];
     extraConfig = {
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
@@ -43,7 +57,8 @@
     autocd = true;
     enableAutosuggestions = true;
     enableCompletion = true;
-    shellAliases = {};
+    enableSyntaxHighlighting = true;
+    shellAliases = { };
     initExtra = ''
       bindkey -e
       take() { mkdir -p "$@" && cd "$@" }
@@ -57,7 +72,15 @@
         hash = "sha256-4y19nUEKBPPe3ZhF5In+26vGtcasgSXkd/LC9TElCOc=";
       };
     }];
-    prezto = { enable = true; };
+    prezto = {
+      enable = true;
+      pmodules = [
+        "gnu-utility"
+        "utility"
+        "git"
+        "directory"
+      ];
+    };
   };
 
   programs.direnv = {
@@ -76,9 +99,19 @@
 
   programs.kitty = {
     enable = true;
+    theme = "Tokyo Night";
     font = {
       package = (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; });
-      name = "Fira Code NF";
+      name = "FiraCode Nerd Font Mono";
     };
   };
+
+  # disabled until i can get it working
+  /* programs.firefox = { */
+  /*   enable = true; */
+  /*   profiles."m8ralpyk.default" = { */
+  /*     userChrome = '' */
+  /*     ''; */
+  /*   }; */
+  /* }; */
 }

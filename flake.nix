@@ -14,7 +14,8 @@
   };
 
   outputs = { self, darwin, nixpkgs, home-manager }: {
-    darwinConfigurations."Bjrns-MBP" = darwin.lib.darwinSystem {
+    # TODO: Figure out why this keeps changing
+    darwinConfigurations."Bjrns-MacBook-Pro" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         ./configuration.nix
@@ -37,7 +38,8 @@
           services.nix-daemon.enable = true;
           services.yabai = {
             enable = true;
-            package = pkgs.yabai;
+            /* package = pkgs.yabai; */
+            package = pkgs.yabai.override {};
             config = {
               focus_follows_mouse = "autoraise";
               mouse_follows_focus = "off";
