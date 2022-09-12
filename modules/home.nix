@@ -18,9 +18,12 @@
     coreutils-prefixed
     gnupg
     jq
+    fd
 
     glow
     mdcat
+
+    myougiden
   ];
 
   home.file.".config/nvim" = {
@@ -104,6 +107,11 @@
       package = (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; });
       name = "FiraCode Nerd Font Mono";
     };
+  };
+
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
   };
 
   # disabled until i can get it working

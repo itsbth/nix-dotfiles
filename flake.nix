@@ -2,10 +2,11 @@
   description = "itsbth's darwin system";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs-channels/nixos-unstable";
+    main.url = "github:nixos/nixpkgs";
     darwin = {
       url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "main";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -13,11 +14,20 @@
     };
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager }: {
+  outputs = { self, darwin, nixpkgs, main, home-manager, ... }@inputs: {
     # TODO: Figure out why this keeps changing
-    darwinConfigurations."Bjrns-MacBook-Pro" = darwin.lib.darwinSystem {
+    darwinConfigurations."Bjrns-MBP" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
+        {
+          nixpkgs.overlays = [
+            (self: super: {
+              myougiden = self.callPackage ./packages/myougiden {
+                inherit (self.python3.pkgs) buildPythonPackage buildPythonApplication fetchPypi;
+              };
+            })
+          ];
+        }
         ./configuration.nix
         ./modules/pam.nix
         ./modules/mac.nix
@@ -27,7 +37,6 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             users.itsbth = {
-              # home = "/Users/itsbth";
               imports = [ ./modules/home.nix ];
             };
           };
@@ -35,11 +44,11 @@
 
         ({ pkgs, ... }: {
           security.pam.enableSudoTouchIdAuth = true;
-          services.nix-daemon.enable = true;
+
           services.yabai = {
             enable = true;
             /* package = pkgs.yabai; */
-            package = pkgs.yabai.override {};
+            package = pkgs.yabai.override { };
             config = {
               focus_follows_mouse = "autoraise";
               mouse_follows_focus = "off";
@@ -51,6 +60,10 @@
               right_padding = 10;
               window_gap = 10;
             };
+          };
+          services.skhd = {
+            enable = true;
+            skhdConfig = builtins.readFile ./config/skhdrc;
           };
 
           programs.gnupg.agent = {

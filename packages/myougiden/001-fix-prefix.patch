@@ -1,0 +1,33 @@
+diff --git a/etc/myougiden/config.ini b/etc/myougiden/config.ini
+index 2522ddd..10d0f65 100644
+--- a/etc/myougiden/config.ini
++++ b/etc/myougiden/config.ini
+@@ -5,7 +5,7 @@ dbversion: 14
+ 
+ [paths]
+ # prefix is calculated at runtime
+-sharedir: %(prefix)s/share/myougiden
++sharedir: %(data_home)s/myougiden
+ database: %(sharedir)s/jmdict_e.sqlite
+ jmdictgz: %(sharedir)s/JMdict_e.gz
+ 
+diff --git a/myougiden/__init__.py b/myougiden/__init__.py
+index 05e0b20..52e09e4 100644
+--- a/myougiden/__init__.py
++++ b/myougiden/__init__.py
+@@ -2,6 +2,7 @@ import configparser
+ import re
+ import os
+ import sys
++from pathlib import Path
+ 
+ def read_config(prefix, rel='etc/myougiden/config.ini'):
+     path = os.path.join(prefix, rel)
+@@ -9,6 +10,7 @@ def read_config(prefix, rel='etc/myougiden/config.ini'):
+         cp = configparser.ConfigParser()
+         cp.read(path)
+         cp.set('paths', 'prefix', prefix)
++        cp.set('paths', 'data_home', os.getenv('XDG_DATA_HOME', str(Path.home() / '.local' / 'share')))
+         return cp
+     else:
+         return None
