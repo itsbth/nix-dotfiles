@@ -25,6 +25,9 @@
               myougiden = self.callPackage ./packages/myougiden {
                 inherit (self.python3.pkgs) buildPythonPackage buildPythonApplication fetchPypi;
               };
+              kitty = super.kitty.overrideAttrs (fin: prev: {
+                doInstallCheck = false;
+              });
             })
           ];
         }
