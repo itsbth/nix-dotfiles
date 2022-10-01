@@ -19,15 +19,23 @@
     gnupg
     jq
     fd
+    httpie
 
     glow
     mdcat
 
     myougiden
+
+    # bitwarden-cli
   ];
 
   home.file.".config/nvim" = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Code/github.com/itsbth/dotfiles/nvim/.config/nvim";
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
   programs.git = {
