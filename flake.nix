@@ -29,22 +29,22 @@
                 doInstallCheck = false;
               });
               # bump neovim
-              neovim-unwrapped = super.neovim-unwrapped.overrideAttrs (old: rec {
-                version = "0.8.0";
-                src = self.fetchFromGitHub {
-                  owner = "neovim";
-                  repo = "neovim";
-                  rev = "v${version}";
-                  sha256 = "sha256-mVeVjkP8JpTi2aW59ZuzQPi5YvEySVAtxko7xxAx/es=";
-                };
-              });
-              libvterm-neovim = super.libvterm-neovim.overrideAttrs (old: rec {
-                version = "0.3";
-                src = self.fetchurl {
-                  url = "https://www.leonerd.org.uk/code/libvterm/libvterm-${version}.tar.gz";
-                  sha256 = "sha256-YesNZijFK98CkA39RGiqhqGnElIourimcyiYGIdIM1g=";
-                };
-              });
+              /* neovim-unwrapped = super.neovim-unwrapped.overrideAttrs (old: rec { */
+              /*   version = "0.8.0"; */
+              /*   src = self.fetchFromGitHub { */
+              /*     owner = "neovim"; */
+              /*     repo = "neovim"; */
+              /*     rev = "v${version}"; */
+              /*     sha256 = "sha256-mVeVjkP8JpTi2aW59ZuzQPi5YvEySVAtxko7xxAx/es="; */
+              /*   }; */
+              /* }); */
+              /* libvterm-neovim = super.libvterm-neovim.overrideAttrs (old: rec { */
+              /*   version = "0.3"; */
+              /*   src = self.fetchurl { */
+              /*     url = "https://www.leonerd.org.uk/code/libvterm/libvterm-${version}.tar.gz"; */
+              /*     sha256 = "sha256-YesNZijFK98CkA39RGiqhqGnElIourimcyiYGIdIM1g="; */
+              /*   }; */
+              /* }); */
               yabai = self.darwin.apple_sdk_11_0.callPackage ./packages/yabai {
                 inherit (self.darwin.apple_sdk.frameworks) Cocoa Carbon ScriptingBridge;
                 inherit (self.darwin.apple_sdk_11_0.frameworks) SkyLight;
@@ -72,8 +72,7 @@
 
           services.yabai = {
             enable = true;
-            /* package = pkgs.yabai; */
-            package = pkgs.yabai.override { };
+            package = pkgs.yabai;
             config = {
               focus_follows_mouse = "autoraise";
               mouse_follows_focus = "off";
