@@ -17,6 +17,7 @@
     ripgrep
     coreutils-prefixed
     gnupg
+    age
     jq
     fd
     httpie
@@ -90,6 +91,11 @@
         "utility"
         "git"
         "directory"
+        "terminal"
+        "editor"
+        "environment"
+        "history"
+        "completion"
       ];
     };
   };
