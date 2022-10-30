@@ -28,10 +28,6 @@
               kitty = super.kitty.overrideAttrs (fin: prev: {
                 doInstallCheck = false;
               });
-              yabai = self.darwin.apple_sdk_11_0.callPackage ./packages/yabai {
-                inherit (self.darwin.apple_sdk.frameworks) Cocoa Carbon ScriptingBridge;
-                inherit (self.darwin.apple_sdk_11_0.frameworks) SkyLight;
-              };
             })
           ];
         }
