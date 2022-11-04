@@ -34,7 +34,7 @@
         ./configuration.nix
         # Has finally been merged into nix-darwin
         # ./modules/pam.nix
-        ./modules/mac.nix
+        # ./modules/mac.nix
         home-manager.darwinModules.home-manager
         {
           home-manager = {
