@@ -23,6 +23,8 @@
       pkgs.jetbrains.webstorm
 
       pkgs.iterm2
+
+      pkgs.podman
     ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
