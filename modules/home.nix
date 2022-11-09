@@ -86,6 +86,9 @@
     }];
     prezto = {
       enable = true;
+      terminal = {
+        autotitle = true;
+      };
       pmodules = [
         "gnu-utility"
         "utility"
@@ -96,6 +99,7 @@
         "environment"
         "history"
         "completion"
+        "spectrum"
       ];
     };
   };
