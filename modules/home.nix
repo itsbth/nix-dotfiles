@@ -86,9 +86,6 @@
     }];
     prezto = {
       enable = true;
-      terminal = {
-        autotitle = true;
-      };
       pmodules = [
         "gnu-utility"
         "utility"
@@ -101,6 +98,7 @@
         "completion"
         "spectrum"
       ];
+      terminal.autoTitle = true;
     };
   };
 
