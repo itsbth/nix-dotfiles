@@ -21,6 +21,8 @@
       pkgs.slack
       pkgs.jetbrains.goland
       pkgs.jetbrains.webstorm
+      pkgs.jetbrains.clion
+      pkgs.jetbrains.pycharm-professional
 
       pkgs.iterm2
 
@@ -33,6 +35,8 @@
 
     "goland"
     "webstorm"
+    "clion"
+    "pycharm-professional"
   ];
 
   # Use a custom configuration.nix location.

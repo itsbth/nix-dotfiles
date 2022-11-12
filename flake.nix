@@ -2,7 +2,7 @@
   description = "itsbth's darwin system";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs-channels/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs-channels/nixpkgs-unstable";
     main.url = "github:nixos/nixpkgs";
     darwin = {
       url = "github:lnl7/nix-darwin";
