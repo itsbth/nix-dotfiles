@@ -12,6 +12,8 @@
   # Put gui apps here to make them available in spotlight
   environment.systemPackages =
     [
+      pkgs.zstd
+
       pkgs.neovim
       pkgs.kitty
       pkgs.vscode
