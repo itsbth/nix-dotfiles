@@ -31,7 +31,7 @@
       # ALL THE CONTAINERS (TODO: Trim this list)
       pkgs.podman
       pkgs.qemu # needed for podman machine
-      pgks.colima
+      pkgs.colima
       pkgs.docker
     ];
 
