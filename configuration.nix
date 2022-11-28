@@ -28,7 +28,11 @@
 
       pkgs.iterm2
 
+      # ALL THE CONTAINERS (TODO: Trim this list)
       pkgs.podman
+      pkgs.qemu # needed for podman machine
+      pgks.colima
+      pkgs.docker
     ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
