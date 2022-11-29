@@ -32,7 +32,7 @@
       pkgs.podman
       pkgs.qemu # needed for podman machine
       pkgs.colima
-      pkgs.docker-client
+      /* pkgs.docker-client */
     ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
