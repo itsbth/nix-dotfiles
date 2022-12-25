@@ -25,6 +25,9 @@
               myougiden = self.callPackage ./packages/myougiden {
                 inherit (self.python3.pkgs) buildPythonPackage buildPythonApplication fetchPypi;
               };
+              httpie = super.httpie.overrideAttrs (old: {
+                doCheck = false;
+              });
             })
           ];
         }

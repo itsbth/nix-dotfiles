@@ -27,7 +27,7 @@
 
     myougiden
 
-    # bitwarden-cli
+    bitwarden-cli
   ];
 
   home.file.".config/nvim" = {
