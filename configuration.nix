@@ -24,6 +24,9 @@
       pkgs.jetbrains.webstorm
       pkgs.jetbrains.clion
       pkgs.jetbrains.pycharm-professional
+      # not currently packaged
+      # pkgs.jetbrains.fleet
+      # pkgs.jetbrains.toolbox
 
       pkgs.discord
       # pkgs.steam
@@ -45,6 +48,8 @@
     "webstorm"
     "clion"
     "pycharm-professional"
+    # "fleet"
+    # "toolbox"
 
     "discord"
     "steam"

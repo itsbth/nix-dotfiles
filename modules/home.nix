@@ -28,6 +28,9 @@
     myougiden
 
     bitwarden-cli
+
+    # let's try some gui apps now that we're using raycast
+    # github-desktop # not packaged for silicon yet
   ];
 
   home.file.".config/nvim" = {
