@@ -42,25 +42,23 @@
   programs.git = {
     enable = true;
     userName = "Bjørn Tore Håvie";
-    userEmail = "bjoern.tore.haavie@pexip.com";
+    userEmail = "itsbth@itsbth.com";
     delta = {
       enable = true;
     };
     ignores = [ ".vim" ".direnv" ];
-    includes = [
-      {
-        path = pkgs.writeText "personal.inc" ''
-          [user]
-            email = itsbth@itsbth.com
-        '';
-        condition = "gitdir:~/Code/github.com/itsbth/";
-      }
-    ];
+    # includes = [
+    #   {
+    #     path = pkgs.writeText "personal.inc" ''
+    #       [user]
+    #         email = itsbth@itsbth.com
+    #     '';
+    #     condition = "gitdir:~/Code/github.com/itsbth/";
+    #   }
+    # ];
     extraConfig = {
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
-      url."git@github.com:pexip/".insteadOf = "https://github.com/pexip/";
-      url."git@gitlab.com:pexip/".insteadOf = "https://gitlab.com/pexip/";
     };
   };
 

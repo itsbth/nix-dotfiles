@@ -20,11 +20,13 @@
 
       pkgs.nixpkgs-fmt
 
-      pkgs.slack
       pkgs.jetbrains.goland
       pkgs.jetbrains.webstorm
       pkgs.jetbrains.clion
       pkgs.jetbrains.pycharm-professional
+
+      pkgs.discord
+      # pkgs.steam
 
       pkgs.iterm2
 
@@ -43,6 +45,9 @@
     "webstorm"
     "clion"
     "pycharm-professional"
+
+    "discord"
+    "steam"
   ];
 
   # Use a custom configuration.nix location.
@@ -52,6 +57,7 @@
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
+  nix.settings."extra-experimental-features" = [ "nix-command" "flakes" ];
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
