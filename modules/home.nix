@@ -44,6 +44,8 @@
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
+
     userName = "Bjørn Tore Håvie";
     userEmail = "itsbth@itsbth.com";
     delta = {
