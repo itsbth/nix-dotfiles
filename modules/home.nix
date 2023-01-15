@@ -123,7 +123,7 @@
     enable = true;
     theme = "Tokyo Night";
     font = {
-      package = (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; });
+      package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
       name = "FiraCode Nerd Font Mono";
     };
   };

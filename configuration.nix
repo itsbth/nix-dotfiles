@@ -15,7 +15,7 @@
       pkgs.zstd
 
       pkgs.neovim
-      pkgs.kitty
+      # pkgs.kitty
       pkgs.vscode
 
       pkgs.nixpkgs-fmt
@@ -61,7 +61,7 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
+  nix.package = pkgs.nixUnstable;
   nix.settings."extra-experimental-features" = [ "nix-command" "flakes" ];
 
   # Create /etc/bashrc that loads the nix-darwin environment.

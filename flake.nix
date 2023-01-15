@@ -2,11 +2,11 @@
   description = "itsbth's darwin system";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs-channels/nixpkgs-unstable";
-    main.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # main.url = "github:nixos/nixpkgs";
     darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "main";
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -25,7 +25,10 @@
               myougiden = self.callPackage ./packages/myougiden {
                 inherit (self.python3.pkgs) buildPythonPackage buildPythonApplication fetchPypi;
               };
-              httpie = super.httpie.overrideAttrs (old: {
+              kitty = super.kitty.overrideAttrs (old: {
+                doInstallCheck = false;
+              });
+              delta = super.delta.overrideAttrs (old: {
                 doCheck = false;
               });
             })
@@ -52,6 +55,7 @@
           services.yabai = {
             enable = true;
             package = pkgs.yabai;
+            enableScriptingAddition = true;
             config = {
               focus_follows_mouse = "autoraise";
               mouse_follows_focus = "off";
