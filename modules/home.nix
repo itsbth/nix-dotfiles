@@ -77,6 +77,8 @@
     initExtra = ''
       bindkey -e
       take() { mkdir -p "$@" && cd "$@" }
+
+      source ${ ../config/iterm2_shell_integration.zsh }
     '';
     plugins = [{
       name = "zsh-fzf-ghq";
@@ -112,6 +114,9 @@
 
   programs.starship = {
     enable = true;
+    settings = {
+      shlvl.disabled = false;
+    };
   };
 
   programs.fzf = {
