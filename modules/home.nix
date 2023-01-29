@@ -78,7 +78,9 @@
       bindkey -e
       take() { mkdir -p "$@" && cd "$@" }
 
-      source ${ ../config/iterm2_shell_integration.zsh }
+      if [[ ! -z "$ITERM_SESSION_ID" ]]; then
+        source ${ ../config/iterm2_shell_integration.zsh }
+      fi
     '';
     plugins = [{
       name = "zsh-fzf-ghq";
