@@ -24,6 +24,7 @@
       pkgs.jetbrains.webstorm
       pkgs.jetbrains.clion
       pkgs.jetbrains.pycharm-professional
+      pkgs.jetbrains.idea-ultimate
       # not currently packaged
       # pkgs.jetbrains.fleet
       # pkgs.jetbrains.toolbox
@@ -48,6 +49,7 @@
     "webstorm"
     "clion"
     "pycharm-professional"
+    "idea-ultimate"
     # "fleet"
     # "toolbox"
 
