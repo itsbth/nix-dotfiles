@@ -1,6 +1,10 @@
-.PHONEY: build diff switch diff-and-switch
+.PHONY: build diff switch diff-and-switch update print-%
 
 HOSTNAME := $(shell hostname)
+OS := $(shell uname -s)
+# nixosConfigrations.<hostname>.system on NixOS, darwinConfigurations.<hostname>.system on Darwin
+TARGET := $(if $(filter Darwin,$(OS)),darwinConfigurations.$(HOSTNAME).system,nixosConfigurations.$(HOSTNAME).system)
+REBUILD := $(if $(filter Darwin,$(OS)),darwin-rebuild,nixos-rebuild)
 
 diff-and-switch: build
 	$(MAKE) -o build diff
@@ -8,13 +12,24 @@ diff-and-switch: build
 	$(MAKE) -o build switch
 
 build:
-	nix build .#darwinConfigurations.$(HOSTNAME).system
+	nix build .#$(TARGET)
 
 diff: build
 	nix-diff /var/run/current-system ./result
 
 switch: build
-	result/sw/bin/darwin-rebuild switch --flake .#
+	result/sw/bin/$(REBUILD) switch --flake .#
 
 update:
 	nix flake update
+
+generate-hardware-configuration: hosts/$(HOSTNAME)/hardware-configuration.nix
+
+hosts/$(HOSTNAME)/hardware-configuration.nix: | hosts/$(HOSTNAME)
+	@if nixos-generate-config --show-hardware-config > $@; \
+	then echo "Hardware configuration updated"; \
+	else echo "nixos-generate-config failed; try running the command again with sudo"; false; \
+	fi
+
+print-%:
+	@echo $*=$($*)
