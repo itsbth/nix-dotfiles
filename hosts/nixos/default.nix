@@ -3,6 +3,6 @@
   modules = [
     ./configuration.nix
 
-    ../modules/k3s.nix
+    ../../modules/k3s.nix
   ];
 }
