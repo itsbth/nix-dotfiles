@@ -2,8 +2,8 @@
 
 HOSTNAME := $(shell hostname)
 OS := $(shell uname -s)
-# nixosConfigrations.<hostname>.system on NixOS, darwinConfigurations.<hostname>.system on Darwin
-TARGET := $(if $(filter Darwin,$(OS)),darwinConfigurations.$(HOSTNAME).system,nixosConfigurations.$(HOSTNAME).system)
+# nixosConfigrations.<hostname>.conifg.system.build.toplevel on NixOS, darwinConfigurations.<hostname>.system on Darwin
+TARGET := $(if $(filter Darwin,$(OS)),darwinConfigurations.$(HOSTNAME).system,nixosConfigurations.$(HOSTNAME).config.system.build.toplevel)
 REBUILD := $(if $(filter Darwin,$(OS)),darwin-rebuild,nixos-rebuild)
 
 diff-and-switch: build
