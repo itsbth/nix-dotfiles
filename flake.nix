@@ -13,11 +13,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
+
+    # Fix VSCode server on nixos
+    vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, hyprland, ... }@inputs: {
     nixosConfigurations.nixos = import ./hosts/nixos {
-      inherit nixpkgs home-manager hyprland;
+      inherit (inputs) nixpkgs home-manager hyprland vscode-server;
     };
     # TODO: Figure out why this keeps changing
     darwinConfigurations."Bjrns-MBP" = import ./hosts/Bjrns-MBP {
