@@ -17,11 +17,11 @@
 
   outputs = { self, darwin, nixpkgs, home-manager, hyprland, ... }@inputs: {
     nixosConfigurations.nixos = import ./hosts/nixos {
-      inherit nixpkgs;
+      inherit nixpkgs home-manager hyprland;
     };
     # TODO: Figure out why this keeps changing
     darwinConfigurations."Bjrns-MBP" = import ./hosts/Bjrns-MBP {
-      inherit darwin home-manager nixpkgs hyprland;
+      inherit darwin home-manager nixpkgs;
     };
   };
 }
