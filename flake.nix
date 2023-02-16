@@ -12,15 +12,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, darwin, nixpkgs, home-manager, hyprland, ... }@inputs: {
     nixosConfigurations.nixos = import ./hosts/nixos {
       inherit nixpkgs;
     };
     # TODO: Figure out why this keeps changing
     darwinConfigurations."Bjrns-MBP" = import ./hosts/Bjrns-MBP {
-      inherit darwin home-manager nixpkgs;
+      inherit darwin home-manager nixpkgs hyprland;
     };
   };
 }
