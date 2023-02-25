@@ -96,6 +96,9 @@
     # Tools needed to update the system.
     git
     gnumake
+
+    # TODO: Move to user profile
+    kitty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
