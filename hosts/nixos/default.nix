@@ -5,12 +5,12 @@
 
     ../../modules/k3s.nix
 
-    # ../../modules/hyprland.nix
+    hyprland.nixosModules.default
+    ../../modules/hyprland.nix
 
     vscode-server.nixosModule
     ({ config, pkgs, ... }: {
       services.vscode-server.enable = true;
     })
-
   ];
 }

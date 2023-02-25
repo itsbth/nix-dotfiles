@@ -31,6 +31,7 @@
 
     # let's try some gui apps now that we're using raycast
     # github-desktop # not packaged for silicon yet
+    mpv
   ];
 
   home.file.".config/nvim" = {
@@ -81,6 +82,14 @@
       if [[ ! -z "$ITERM_SESSION_ID" ]]; then
         source ${ ../config/iterm2_shell_integration.zsh }
       fi
+
+      local to_wrap=(wget)
+      for cmd ( $to_wrap ); do
+        if [[ -z $+commands[$cmd] ]]; then
+          eval "function $cmd() { nix shell nixpkgs\#$cmd -c $cmd \"\$@\"; }"
+        fi
+      done
+      unset to_wrap
     '';
     plugins = [{
       name = "zsh-fzf-ghq";
