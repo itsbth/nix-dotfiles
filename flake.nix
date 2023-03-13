@@ -26,5 +26,8 @@
     darwinConfigurations."Bjrns-MBP" = import ./hosts/Bjrns-MBP {
       inherit darwin home-manager nixpkgs;
     };
+    darwinConfigurations."itsbth-mbp16" = import ./hosts/Bjrns-MBP {
+      inherit darwin home-manager nixpkgs;
+    };
   };
 }
