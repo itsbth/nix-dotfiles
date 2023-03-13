@@ -1,4 +1,4 @@
-.PHONY: build diff switch diff-and-switch update print-%
+.PHONY: build diff switch diff-and-switch update generate-hardware-configuration print-%
 
 HOSTNAME := $(shell hostname)
 OS := $(shell uname -s)
@@ -13,9 +13,10 @@ diff-and-switch: build
 
 build:
 	nix build .#$(TARGET)
+	nix store diff-closures /var/run/current-system ./result
 
 diff: build
-	nix-diff /var/run/current-system ./result
+	nix-diff --color=always /var/run/current-system ./result | less -R --quit-if-one-screen
 
 switch: build
 	result/sw/bin/$(REBUILD) switch --flake .#

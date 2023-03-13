@@ -53,15 +53,15 @@
       enable = true;
     };
     ignores = [ ".vim" ".direnv" ];
-    # includes = [
-    #   {
-    #     path = pkgs.writeText "personal.inc" ''
-    #       [user]
-    #         email = itsbth@itsbth.com
-    #     '';
-    #     condition = "gitdir:~/Code/github.com/itsbth/";
-    #   }
-    # ];
+    includes = [
+      {
+        path = pkgs.writeText "work.inc" ''
+          [user]
+            email = bth@neowit.io
+        '';
+        condition = "gitdir:~/Code/gitlab.com/neowit/";
+      }
+    ];
     extraConfig = {
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
