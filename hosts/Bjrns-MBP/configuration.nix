@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  networking.hostName = "Bjrns-MBP";
-
   users.users.itsbth = {
     home = "/Users/itsbth";
     # desc = "Bjørn Tore Håvie";

@@ -26,8 +26,33 @@
     darwinConfigurations."Bjrns-MBP" = import ./hosts/Bjrns-MBP {
       inherit darwin home-manager nixpkgs;
     };
-    darwinConfigurations."itsbth-mbp16" = import ./hosts/Bjrns-MBP {
-      inherit darwin home-manager nixpkgs;
+    darwinConfigurations."itsbth-mbp16" = darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      networking.hostName = "itsbth-mbp16";
+      modules = [
+        ./hosts/Bjrns-MBP/configuration.nix
+        { networking.hostName = "itsbth-mbp16"; }
+        ./modules/overlays.nix
+        home-manager.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.itsbth = {
+              imports = [ ./modules/home.nix ];
+            };
+          };
+        }
+        ./modules/yabai.nix
+        ({ pkgs, ... }: {
+          security.pam.enableSudoTouchIdAuth = true;
+
+          programs.gnupg.agent = {
+            enable = true;
+            enableSSHSupport = true;
+          };
+        })
+      ];
     };
   };
 }
