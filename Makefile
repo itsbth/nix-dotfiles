@@ -12,8 +12,11 @@ diff-and-switch: build
 	$(MAKE) -o build switch
 
 build:
-	nix build .#$(TARGET)
-	nix store diff-closures /var/run/current-system ./result
+	nix --extra-experimental-features 'nix-command flakes' build .#$(TARGET)
+	@if [ -d /var/run/current-system ]; \
+		then nix store diff-closures /var/run/current-system ./result; \
+		else echo "/var/run/current-system missing. first run?"; \
+	fi
 
 diff: build
 	nix-diff --color=always /var/run/current-system ./result | less -R --quit-if-one-screen

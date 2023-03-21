@@ -28,10 +28,10 @@
     };
     darwinConfigurations."itsbth-mbp16" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      networking.hostName = "itsbth-mbp16";
+      # networking.hostName = "itsbth-mbp16";
       modules = [
         ./hosts/Bjrns-MBP/configuration.nix
-        { networking.hostName = "itsbth-mbp16"; }
+        # { networking.hostName = "itsbth-mbp16"; }
         ./modules/overlays.nix
         home-manager.darwinModules.home-manager
         {
