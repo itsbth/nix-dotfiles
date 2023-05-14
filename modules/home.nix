@@ -29,6 +29,10 @@
 
     bitwarden-cli
 
+    # rather not have them global, but it simplifies some stuff for now
+    nodejs
+    cargo
+
     # let's try some gui apps now that we're using raycast
     # github-desktop # not packaged for silicon yet
     mpv
@@ -139,8 +143,8 @@
     enable = true;
     theme = "Tokyo Night";
     font = {
-      package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
-      name = "FiraCode Nerd Font Mono";
+      package = pkgs.fira-code;
+      name = "Fira Code";
     };
   };
 
