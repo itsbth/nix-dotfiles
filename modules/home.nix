@@ -95,15 +95,26 @@
       done
       unset to_wrap
     '';
-    plugins = [{
-      name = "zsh-fzf-ghq";
-      src = pkgs.fetchFromGitHub {
-        owner = "itsbth";
-        repo = "zsh-fzf-ghq";
-        rev = "master";
-        hash = "sha256-4y19nUEKBPPe3ZhF5In+26vGtcasgSXkd/LC9TElCOc=";
-      };
-    }];
+    plugins = [
+      {
+        name = "zsh-fzf-ghq";
+        src = pkgs.fetchFromGitHub {
+          owner = "itsbth";
+          repo = "zsh-fzf-ghq";
+          rev = "master";
+          sha256 = "sha256-4y19nUEKBPPe3ZhF5In+26vGtcasgSXkd/LC9TElCOc=";
+        };
+      }
+      {
+        name = "alias-tips";
+        src = pkgs.fetchFromGitHub {
+          owner = "djui";
+          repo = "alias-tips";
+          rev = "master";
+          sha256 = "sha256-ZFWrwcwwwSYP5d8k7Lr/hL3WKAZmgn51Q9hYL3bq9vE=";
+        };
+      }
+    ];
     prezto = {
       enable = true;
       pmodules = [
