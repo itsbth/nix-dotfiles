@@ -1,4 +1,4 @@
-{ ... }: {
+_: {
   # Allow API server
   networking.firewall.allowedTCPPorts = [ 6443 ];
 
