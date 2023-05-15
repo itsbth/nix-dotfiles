@@ -29,8 +29,13 @@
 
     bitwarden-cli
 
+    # rather not have them global, but it simplifies some stuff for now
+    nodejs
+    cargo
+
     # let's try some gui apps now that we're using raycast
     # github-desktop # not packaged for silicon yet
+    mpv
   ];
 
   home.file.".config/nvim" = {
@@ -52,15 +57,15 @@
       enable = true;
     };
     ignores = [ ".vim" ".direnv" ];
-    # includes = [
-    #   {
-    #     path = pkgs.writeText "personal.inc" ''
-    #       [user]
-    #         email = itsbth@itsbth.com
-    #     '';
-    #     condition = "gitdir:~/Code/github.com/itsbth/";
-    #   }
-    # ];
+    includes = [
+      {
+        path = pkgs.writeText "work.inc" ''
+          [user]
+            email = bth@neowit.io
+        '';
+        condition = "gitdir:~/Code/gitlab.com/neowit/";
+      }
+    ];
     extraConfig = {
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
@@ -81,16 +86,35 @@
       if [[ ! -z "$ITERM_SESSION_ID" ]]; then
         source ${ ../config/iterm2_shell_integration.zsh }
       fi
+
+      local to_wrap=(wget)
+      for cmd ( $to_wrap ); do
+        if [[ -z $+commands[$cmd] ]]; then
+          eval "function $cmd() { nix shell nixpkgs\#$cmd -c $cmd \"\$@\"; }"
+        fi
+      done
+      unset to_wrap
     '';
-    plugins = [{
-      name = "zsh-fzf-ghq";
-      src = pkgs.fetchFromGitHub {
-        owner = "itsbth";
-        repo = "zsh-fzf-ghq";
-        rev = "master";
-        hash = "sha256-4y19nUEKBPPe3ZhF5In+26vGtcasgSXkd/LC9TElCOc=";
-      };
-    }];
+    plugins = [
+      {
+        name = "zsh-fzf-ghq";
+        src = pkgs.fetchFromGitHub {
+          owner = "itsbth";
+          repo = "zsh-fzf-ghq";
+          rev = "master";
+          sha256 = "sha256-4y19nUEKBPPe3ZhF5In+26vGtcasgSXkd/LC9TElCOc=";
+        };
+      }
+      {
+        name = "alias-tips";
+        src = pkgs.fetchFromGitHub {
+          owner = "djui";
+          repo = "alias-tips";
+          rev = "master";
+          sha256 = "sha256-ZFWrwcwwwSYP5d8k7Lr/hL3WKAZmgn51Q9hYL3bq9vE=";
+        };
+      }
+    ];
     prezto = {
       enable = true;
       pmodules = [
@@ -130,8 +154,8 @@
     enable = true;
     theme = "Tokyo Night";
     font = {
-      package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
-      name = "FiraCode Nerd Font Mono";
+      package = pkgs.fira-code;
+      name = "Fira Code";
     };
   };
 

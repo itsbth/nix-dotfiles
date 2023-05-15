@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  networking.hostName = "Bjrns-MBP";
-
   users.users.itsbth = {
     home = "/Users/itsbth";
     # desc = "Bjørn Tore Håvie";
@@ -56,6 +54,13 @@
     "discord"
     "steam"
   ];
+
+  fonts = {
+    fontDir.enable = true;
+    fonts = [
+      (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+    ];
+  };
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
