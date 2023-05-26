@@ -1,6 +1,7 @@
 .PHONY: build diff switch diff-and-switch update generate-hardware-configuration print-%
 
-HOSTNAME := $(shell hostname)
+# -s to avoid dhcp suffix
+HOSTNAME := $(shell hostname -s)
 OS := $(shell uname -s)
 # nixosConfigrations.<hostname>.conifg.system.build.toplevel on NixOS, darwinConfigurations.<hostname>.system on Darwin
 TARGET := $(if $(filter Darwin,$(OS)),darwinConfigurations.$(HOSTNAME).system,nixosConfigurations.$(HOSTNAME).config.system.build.toplevel)
