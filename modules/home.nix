@@ -3,6 +3,8 @@
   home.packages = with pkgs; [
     nixfmt
 
+    devbox # declarative environments
+
     # nvim + config stuff
     neovim
     fennel
@@ -31,8 +33,8 @@
 
     # rather not have them global, but it simplifies some stuff for now
     nodejs
-    cargo
 
+    rustup # :/
     # let's try some gui apps now that we're using raycast
     # github-desktop # not packaged for silicon yet
     mpv
