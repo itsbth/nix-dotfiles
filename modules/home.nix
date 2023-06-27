@@ -26,6 +26,7 @@
 
     glow
     mdcat
+    bat
 
     myougiden
 
@@ -165,6 +166,9 @@
     enable = true;
     enableAliases = true;
   };
+
+  # currently broken
+  manual.manpages.enable = false;
 
   # disabled until i can get it working
   /* programs.firefox = { */

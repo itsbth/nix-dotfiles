@@ -52,6 +52,8 @@
             enableSSHSupport = true;
           };
         })
+        # Breaks way too often
+        { documentation.enable = false; }
       ];
     };
   };
