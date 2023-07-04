@@ -80,7 +80,9 @@
     autocd = true;
     enableAutosuggestions = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
     shellAliases = { };
     initExtra = ''
       bindkey -e
@@ -161,10 +163,31 @@
       name = "Fira Code";
     };
   };
+  programs.wezterm = {
+    enable = true;
+    extraConfig =
+      let
+        config = pkgs.stdenv.mkDerivation {
+          name = "wezterm-config";
+          buildInputs = [ pkgs.fennel ];
+          src = ../config/wezterm.fnl;
+          phases = [ "buildPhase" ];
+          buildPhase = ''
+            mkdir -p $out
+            fennel --compile $src > $out/wezterm.lua
+          '';
+        };
+      in
+      "return dofile '${config}/wezterm.lua'";
+  };
 
   programs.exa = {
     enable = true;
     enableAliases = true;
+  };
+
+  programs.broot = {
+    enable = true;
   };
 
   # currently broken

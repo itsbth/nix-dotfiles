@@ -22,7 +22,7 @@
     nixosConfigurations.nixos = import ./hosts/nixos {
       inherit (inputs) nixpkgs home-manager hyprland vscode-server;
     };
-    # TODO: Figure out why this keeps changing
+    # TODO: rename this to itsbth-mbp13 for consistency
     darwinConfigurations."Bjrns-MBP" = import ./hosts/Bjrns-MBP {
       inherit darwin home-manager nixpkgs;
     };
