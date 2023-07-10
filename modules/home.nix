@@ -24,9 +24,6 @@
     fd
     httpie
 
-    # history => sqlite
-    atuin
-
     glow
     mdcat
     bat
@@ -80,6 +77,14 @@
     };
   };
 
+  programs.atuin = {
+    enable = true;
+    flags = [ "--disable-up-arrow" ];
+    settings = {
+      sync_address = "https://atuin.itsbth.party";
+    };
+  };
+
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -104,8 +109,6 @@
         fi
       done
       unset to_wrap
-
-      eval "$(${pkgs.atuin}/bin/atuin init zsh)"
     '';
     plugins = [
       {
