@@ -24,6 +24,9 @@
     fd
     httpie
 
+    # history => sqlite
+    atuin
+
     glow
     mdcat
     bat
@@ -56,9 +59,10 @@
 
     userName = "Bjørn Tore Håvie";
     userEmail = "itsbth@itsbth.com";
-    delta = {
-      enable = true;
-    };
+    # delta = {
+    #   enable = true;
+    # };
+    difftastic.enable = true;
     ignores = [ ".vim" ".direnv" ];
     includes = [
       {
@@ -72,6 +76,7 @@
     extraConfig = {
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
+      push.autoSetupRemote = true;
     };
   };
 
@@ -99,6 +104,8 @@
         fi
       done
       unset to_wrap
+
+      eval "$(${pkgs.atuin}/bin/atuin init zsh)"
     '';
     plugins = [
       {

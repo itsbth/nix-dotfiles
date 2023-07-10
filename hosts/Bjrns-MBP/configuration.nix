@@ -9,15 +9,6 @@
   # $ nix-env -qaP | grep wget
   # Put gui apps here to make them available in spotlight
   environment.systemPackages =
-    # TODO: Remove this once nixpkgs has been updated
-    let updatedWebstorm = pkgs.jetbrains.webstorm.overrideAttrs(final: prev: {
-      version = "2023.1.3";
-      src = builtins.fetchurl {
-        url = "https://download.jetbrains.com/webstorm/WebStorm-2023.1.3-aarch64.dmg";
-        sha256 = "c5cc29db9a12515892beed79e1970e628a816f78c629045795ea16c6e5629a2b";
-      };
-    });
-    in
     [
       pkgs.zstd
 
@@ -28,7 +19,7 @@
       pkgs.nixpkgs-fmt
 
       pkgs.jetbrains.goland
-      updatedWebstorm
+      pkgs.jetbrains.webstorm
       pkgs.jetbrains.clion
       pkgs.jetbrains.pycharm-professional
       pkgs.jetbrains.idea-ultimate
@@ -67,7 +58,8 @@
   fonts = {
     fontDir.enable = true;
     fonts = [
-      (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+      # temporarily disabled while i try to figure out why it's seemingly outdated
+      # (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
     ];
   };
 
