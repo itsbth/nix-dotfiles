@@ -173,6 +173,7 @@
       name = "Fira Code";
     };
   };
+
   programs.wezterm = {
     enable = true;
     extraConfig =
