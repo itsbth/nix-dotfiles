@@ -104,8 +104,8 @@
 
       local to_wrap=(wget)
       for cmd ( $to_wrap ); do
-        if [[ -z $+commands[$cmd] ]]; then
-          eval "function $cmd() { nix shell nixpkgs\#$cmd -c $cmd \"\$@\"; }"
+        if [[ $+commands[$cmd] -eq 0 ]]; then
+          eval "function $cmd() { nix run nixpkgs\#$cmd -- \"\$@\"; }"
         fi
       done
       unset to_wrap
