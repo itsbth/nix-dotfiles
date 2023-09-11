@@ -226,7 +226,7 @@
       "return dofile '${config}/wezterm.lua'";
   };
 
-  programs.exa = {
+  programs.eza = {
     enable = true;
     enableAliases = true;
   };

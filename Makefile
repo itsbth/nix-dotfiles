@@ -1,4 +1,7 @@
-.PHONY: build diff switch diff-and-switch update generate-hardware-configuration print-%
+.PHONY: build diff switch diff-and-switch
+.PHONY: update generate-hardware-configuration
+.PHONY: collect-garbage collect-garbage-system collect-garbage-home
+.PHONY: print-%
 
 # -s to avoid dhcp suffix
 HOSTNAME := $(shell hostname -s)
@@ -6,6 +9,8 @@ OS := $(shell uname -s)
 # nixosConfigrations.<hostname>.conifg.system.build.toplevel on NixOS, darwinConfigurations.<hostname>.system on Darwin
 TARGET := $(if $(filter Darwin,$(OS)),darwinConfigurations.$(HOSTNAME).system,nixosConfigurations.$(HOSTNAME).config.system.build.toplevel)
 REBUILD := $(if $(filter Darwin,$(OS)),darwin-rebuild,nixos-rebuild)
+
+GC_MIN_AGE := 14d
 
 diff-and-switch: build
 	$(MAKE) -o build diff
@@ -27,6 +32,14 @@ switch: build
 
 update:
 	nix flake update
+
+collect-garbage-system:
+	sudo nix-collect-garbage --delete-older-than $(GC_MIN_AGE)
+
+collect-garbage-home:
+	nix-collect-garbage --delete-older-than $(GC_MIN_AGE)
+
+collect-garbage: collect-garbage-system collect-garbage-home
 
 generate-hardware-configuration: hosts/$(HOSTNAME)/hardware-configuration.nix
 
