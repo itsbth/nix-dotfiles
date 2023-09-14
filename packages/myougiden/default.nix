@@ -1,19 +1,20 @@
-{ lib, python3Packages, buildPythonPackage, buildPythonApplication, fetchPypi }:
-let romkan = buildPythonPackage rec {
-  pname = "romkan";
-  version = "0.2.1";
+{ lib, python3Packages, ... }:
+let
+  romkan = python3Packages.buildPythonPackage rec {
+    pname = "romkan";
+    version = "0.2.1";
 
-  src = fetchPypi {
-    inherit pname version;
-    sha256 = "a530245a38969704700e0ca8f9cb7158c4ede91c5fd1e24677dbe814cf91f33b";
+    src = python3Packages.fetchPypi {
+      inherit pname version;
+      sha256 = "a530245a38969704700e0ca8f9cb7158c4ede91c5fd1e24677dbe814cf91f33b";
+    };
   };
-};
 in
-buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "myougiden";
   version = "0.8.9";
 
-  src = fetchPypi {
+  src = python3Packages.fetchPypi {
     inherit pname version;
     sha256 = "3fbadd41fc00808447c88271ca65414f5b7f02e3186e037c576844a5abf0d36a";
   };

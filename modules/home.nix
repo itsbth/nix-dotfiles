@@ -9,6 +9,7 @@
     neovim
     fennel
     fnlfmt
+    fennel-ls
 
     rnix-lsp
 
