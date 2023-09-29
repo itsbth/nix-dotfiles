@@ -15,6 +15,9 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     make install PREFIX=$out
   '';
+  checkPhase = ''
+    make test
+  '';
   meta = {
     description = "Fennel Language Server";
     homepage = "https://git.sr.ht/~xerool/fennel-ls";

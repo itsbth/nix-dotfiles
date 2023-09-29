@@ -220,7 +220,7 @@
           phases = [ "buildPhase" ];
           buildPhase = ''
             mkdir -p $out
-            fennel --compile $src > $out/wezterm.lua
+            fennel --compile --require-as-include $src > $out/wezterm.lua
           '';
         };
       in
