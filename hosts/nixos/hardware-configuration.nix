@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" ];
@@ -14,31 +15,41 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f8aea2b6-fa06-4b7b-882b-aaa44a01c094";
+    {
+      device = "/dev/disk/by-uuid/f8aea2b6-fa06-4b7b-882b-aaa44a01c094";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/f8aea2b6-fa06-4b7b-882b-aaa44a01c094";
+    {
+      device = "/dev/disk/by-uuid/f8aea2b6-fa06-4b7b-882b-aaa44a01c094";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/f8aea2b6-fa06-4b7b-882b-aaa44a01c094";
+    {
+      device = "/dev/disk/by-uuid/f8aea2b6-fa06-4b7b-882b-aaa44a01c094";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
+  fileSystems."/home/k3s-user/data" =
+    {
+      device = "/dev/disk/by-uuid/f8aea2b6-fa06-4b7b-882b-aaa44a01c094";
+      fsType = "btrfs";
+      options = [ "subvol=k3s-data" ];
+    };
+
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F668-779D";
+    {
+      device = "/dev/disk/by-uuid/F668-779D";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/c79e64f2-e629-4967-a96a-d825de548294"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/c79e64f2-e629-4967-a96a-d825de548294"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
