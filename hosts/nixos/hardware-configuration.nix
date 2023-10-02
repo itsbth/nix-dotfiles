@@ -35,14 +35,14 @@
       options = [ "subvol=home" ];
     };
 
-  fileSystems."/home/k3s-user/data" =
+  fileSystems."/home/k3s-data/data" =
     {
       device = "/dev/disk/by-uuid/f8aea2b6-fa06-4b7b-882b-aaa44a01c094";
       fsType = "btrfs";
       options = [ "subvol=k3s-data" ];
     };
 
-  fileSystems."/home/k3s-user/media" =
+  fileSystems."/home/k3s-data/media" =
     {
       device = "/dev/disk/by-uuid/3aeb9e35-8858-41a6-95cc-2d36d9fb16e0";
       fsType = "btrfs";
