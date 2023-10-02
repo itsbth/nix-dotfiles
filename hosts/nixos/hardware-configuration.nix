@@ -47,7 +47,6 @@
       device = "/dev/disk/by-uuid/3aeb9e35-8858-41a6-95cc-2d36d9fb16e0";
       fsType = "btrfs";
       # This should really have used subvolumes...
-      options = [ ];
     };
 
   fileSystems."/boot" =
