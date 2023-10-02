@@ -88,9 +88,12 @@
   };
 
   users.users.k3s-data = {
-    isNormalUser = false;
+    isSystemUser = true;
     createHome = true;
+    group = "k3s-data";
   };
+
+  users.groups.k3s-data = { };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
