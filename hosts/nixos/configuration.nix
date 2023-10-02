@@ -87,6 +87,11 @@
     ];
   };
 
+  users.users.k3s-data = {
+    isNormalUser = false;
+    createHome = true;
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

@@ -11,7 +11,7 @@ usage() {
 # Default values for optional variables
 REPO_REMOTE="https://github.com/itsbth/nix-dotfiles.git"
 REPO_LOCAL="./nix-dotfiles"
-BRANCH="feat/nixos"
+BRANCH="$(git rev-parse --abbrev-ref HEAD)" # TODO: Require flag for non-main branch?
 
 # Get options
 while getopts ":r:l:b:h" opt; do
