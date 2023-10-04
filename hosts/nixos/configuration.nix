@@ -130,7 +130,7 @@
     enable = true;
     email = "itsbth@itsbth.com";
     apiTokenFile = "/etc/ddns/cf-token";
-    records = [ "home.itsbth.com" "*.home.itsbth.com" ];
+    records = [ "home.itsbth.com" ];
   };
 
   # Open ports in the firewall.
