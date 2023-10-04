@@ -126,6 +126,13 @@
     enable = true;
   };
 
+  services.cfdyndns = {
+    enable = true;
+    email = "itsbth@itsbth.com";
+    apiTokenFile = "/etc/ddns/cf-token";
+    records = [ "home.itsbth.com" "*.home.itsbth.com" ];
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
