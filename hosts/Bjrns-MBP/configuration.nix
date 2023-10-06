@@ -33,7 +33,7 @@
       pkgs.iterm2
 
       # ALL THE CONTAINERS (TODO: Trim this list)
-      pkgs.podman
+      # pkgs.podman
       pkgs.qemu # needed for podman machine
       pkgs.colima
       pkgs.docker-client
