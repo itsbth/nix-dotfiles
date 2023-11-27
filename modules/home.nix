@@ -173,6 +173,9 @@
       package = pkgs.fira-code;
       name = "Fira Code";
     };
+    settings = {
+	scrollback_lines = 16384;
+    };
     # it doesn't appear to pick the right font for symbols
     # source: https://github.com/ryanoasis/nerd-fonts/issues/1189#issuecomment-1536112595
     extraConfig = ''
