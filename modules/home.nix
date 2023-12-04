@@ -12,6 +12,7 @@
     fennel-ls
 
     rnix-lsp
+    nixd
 
     ghq
     gh
