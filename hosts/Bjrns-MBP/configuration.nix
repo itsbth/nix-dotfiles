@@ -18,15 +18,7 @@
     pkgs.nixpkgs-fmt
 
     pkgs.jetbrains.goland
-    (pkgs.jetbrains.webstorm.overrideAttrs {
-      version = "2023.2.5";
-      src = builtins.fetchurl {
-        url =
-          "https://download.jetbrains.com/webstorm/WebStorm-2023.2.5-aarch64.dmg";
-        sha256 =
-          "0skl7cqb3hgyz1sd7snsh7xcr54z530dqm7yyiisx1b6bs051p00";
-      };
-    })
+    pkgs.jetbrains.webstorm
     pkgs.jetbrains.clion
     pkgs.jetbrains.pycharm-professional
     pkgs.jetbrains.idea-ultimate
