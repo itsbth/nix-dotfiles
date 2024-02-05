@@ -20,7 +20,15 @@
     pkgs.jetbrains.goland
     pkgs.jetbrains.webstorm
     pkgs.jetbrains.clion
-    pkgs.jetbrains.pycharm-professional
+    (pkgs.jetbrains.pycharm-professional.overrideAttrs {
+      version = "2023.3.3";
+      src = builtins.fetchurl {
+        url =
+          "https://download.jetbrains.com/python/pycharm-professional-2023.3.3-aarch64.dmg";
+        sha256 =
+          "0i52svj80hbys4cs6s8b9vy45xbcj45f56xxrxz2zp1rhn9hkyw4";
+      };
+    })
     pkgs.jetbrains.idea-ultimate
     # not currently packaged
     # pkgs.jetbrains.fleet

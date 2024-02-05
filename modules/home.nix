@@ -176,6 +176,7 @@
     };
     settings = {
 	scrollback_lines = 16384;
+	notify_on_cmd_finish = "unfocused";
     };
     # it doesn't appear to pick the right font for symbols
     # source: https://github.com/ryanoasis/nerd-fonts/issues/1189#issuecomment-1536112595
