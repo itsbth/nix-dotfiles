@@ -2,7 +2,7 @@
   system = "aarch64-darwin";
   modules = [
     ./configuration.nix
-    { networking.hostName = "Bjrns-MBP"; }
+    { networking.hostName = "itsbth-mbp13"; }
     ../../modules/overlays.nix
     home-manager.darwinModules.home-manager
     {

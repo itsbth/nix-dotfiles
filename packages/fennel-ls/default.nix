@@ -4,8 +4,8 @@ stdenv.mkDerivation rec {
   version = "0.1.0";
   src = fetchgit {
     url = "https://git.sr.ht/~xerool/fennel-ls";
-    rev = "364d02b90de6e41c40fc31a19665cad20041c63a";
-    hash = "sha256-SAu/i3g1jXMCq/gE9nwxvWQ2eE8qGB4mxvVIzypmVOw=";
+    rev = "a29cbe496e7c110b304b0119e7d8b91aa0fa713d";
+    hash = "sha256-RW3WFJGwascD4YnnrAm/2LFnVigzgtfzVubLMDW9J5s=";
   };
   buildInputs = [ pkgs.fennel pkgs.lua ];
   buildPhase = ''

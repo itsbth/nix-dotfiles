@@ -23,14 +23,14 @@
       inherit (inputs) nixpkgs home-manager hyprland vscode-server;
     };
     # TODO: rename this to itsbth-mbp13 for consistency
-    darwinConfigurations."Bjrns-MBP" = import ./hosts/Bjrns-MBP {
+    darwinConfigurations."itsbth-mbp13" = import ./hosts/itsbth-mbp13 {
       inherit darwin home-manager nixpkgs;
     };
     darwinConfigurations."itsbth-mbp16" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       # networking.hostName = "itsbth-mbp16";
       modules = [
-        ./hosts/Bjrns-MBP/configuration.nix
+        ./hosts/itsbth-mbp13/configuration.nix
         # { networking.hostName = "itsbth-mbp16"; }
         ./modules/overlays.nix
         home-manager.darwinModules.home-manager
