@@ -49,5 +49,10 @@ hosts/$(HOSTNAME)/hardware-configuration.nix: | hosts/$(HOSTNAME)
 	else echo "nixos-generate-config failed; try running the command again with sudo"; false; \
 	fi
 
+commit-and-push:
+	git add -u
+	git commit -m "nix flake update"
+	git push
+
 print-%:
 	@echo $*=$($*)
