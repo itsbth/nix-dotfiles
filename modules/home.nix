@@ -11,7 +11,6 @@
     fnlfmt
     fennel-ls
 
-    rnix-lsp
     nixd
 
     ghq
@@ -43,8 +42,10 @@
     mpv
   ];
 
+  # too volatile to embed in nix configuration for now
   home.file.".config/nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Code/github.com/itsbth/dotfiles/nvim/.config/nvim";
+    source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/Code/github.com/itsbth/dotfiles/nvim/.config/nvim";
   };
 
   home.sessionVariables = {
@@ -63,15 +64,13 @@
     # };
     difftastic.enable = true;
     ignores = [ ".vim" ".direnv" ];
-    includes = [
-      {
-        path = pkgs.writeText "work.inc" ''
-          [user]
-            email = bth@neowit.io
-        '';
-        condition = "gitdir:~/Code/gitlab.com/neowit/";
-      }
-    ];
+    includes = [{
+      path = pkgs.writeText "work.inc" ''
+        [user]
+          email = bth@neowit.io
+      '';
+      condition = "gitdir:~/Code/gitlab.com/neowit/";
+    }];
     extraConfig = {
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
@@ -82,29 +81,27 @@
   programs.atuin = {
     enable = true;
     flags = [ "--disable-up-arrow" ];
-    settings = {
-      sync_address = "https://atuin.itsbth.party";
-    };
+    settings = { sync_address = "https://atuin.itsbth.party"; };
   };
 
   programs.zsh = {
     enable = true;
     autocd = true;
-    enableAutosuggestions = true;
     enableCompletion = true;
-    syntaxHighlighting = {
-      enable = true;
-    };
+    syntaxHighlighting = { enable = true; };
+    autosuggestion = { enable = true; };
     shellAliases = { };
     initExtra = ''
       bindkey -e
       take() { mkdir -p "$@" && cd "$@" }
 
       if [[ ! -z "$ITERM_SESSION_ID" ]]; then
-        source ${ ../config/iterm2_shell_integration.zsh }
+        source ${../config/iterm2_shell_integration.zsh}
       fi
 
-      local to_wrap=(wget)
+      # utilities that are occasionally used outside of project-specific
+      # environments, but I don't want globally installed
+      local to_wrap=( wget htop kubectl kubectx )
       for cmd ( $to_wrap ); do
         if [[ $+commands[$cmd] -eq 0 ]]; then
           eval "function $cmd() { nix run nixpkgs\#$cmd -- \"\$@\"; }"
@@ -157,9 +154,7 @@
 
   programs.starship = {
     enable = true;
-    settings = {
-      shlvl.disabled = false;
-    };
+    settings = { shlvl.disabled = false; };
   };
 
   programs.fzf = {
@@ -175,8 +170,8 @@
       name = "Fira Code";
     };
     settings = {
-	scrollback_lines = 16384;
-	notify_on_cmd_finish = "unfocused";
+      scrollback_lines = 16384;
+      notify_on_cmd_finish = "unfocused";
     };
     # it doesn't appear to pick the right font for symbols
     # source: https://github.com/ryanoasis/nerd-fonts/issues/1189#issuecomment-1536112595
@@ -216,40 +211,33 @@
 
   programs.wezterm = {
     enable = true;
-    extraConfig =
-      let
-        config = pkgs.stdenv.mkDerivation {
-          name = "wezterm-config";
-          buildInputs = [ pkgs.fennel ];
-          src = ../config/wezterm.fnl;
-          phases = [ "buildPhase" ];
-          buildPhase = ''
-            mkdir -p $out
-            fennel --compile --require-as-include $src > $out/wezterm.lua
-          '';
-        };
-      in
-      "return dofile '${config}/wezterm.lua'";
+    extraConfig = let
+      config = pkgs.stdenv.mkDerivation {
+        name = "wezterm-config";
+        buildInputs = [ pkgs.fennel ];
+        src = ../config/wezterm.fnl;
+        phases = [ "buildPhase" ];
+        buildPhase = ''
+          mkdir -p $out
+          fennel --compile --require-as-include $src > $out/wezterm.lua
+        '';
+      };
+    in "return dofile '${config}/wezterm.lua'";
   };
 
-  programs.eza = {
-    enable = true;
-    enableAliases = true;
-  };
+  programs.eza = { enable = true; };
 
-  programs.broot = {
-    enable = true;
-  };
+  programs.broot = { enable = true; };
 
   # currently broken
   manual.manpages.enable = false;
 
   # disabled until i can get it working
-  /* programs.firefox = { */
-  /*   enable = true; */
-  /*   profiles."m8ralpyk.default" = { */
-  /*     userChrome = '' */
-  /*     ''; */
-  /*   }; */
-  /* }; */
+  # programs.firefox = {
+  # enable = true;
+  # profiles."m8ralpyk.default" = {
+  # userChrome = ''
+  # '';
+  # };
+  # };
 }
