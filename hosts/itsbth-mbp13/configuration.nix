@@ -69,7 +69,8 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nixUnstable;
+  # TODO: Try git? (I, too, like to live dangerously)
+  nix.package = pkgs.nixVersions.latest;
   nix.settings."extra-experimental-features" = [ "nix-command" "flakes" ];
 
   # Create /etc/bashrc that loads the nix-darwin environment.
