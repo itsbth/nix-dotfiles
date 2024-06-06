@@ -51,7 +51,11 @@ hosts/$(HOSTNAME)/hardware-configuration.nix: | hosts/$(HOSTNAME)
 
 commit-and-push:
 	git add -u
-	git commit -m "nix flake update"
+	@if git diff --name-only --cached | grep -qv flake.lock; \
+	then git commit -m "nix flake update(++)"; \
+	else git commit -m "nix flake update"; \
+	fi
+
 	git push
 
 print-%:
