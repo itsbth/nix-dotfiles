@@ -31,7 +31,8 @@
 
     myougiden
 
-    bitwarden-cli
+    # build broken
+    # bitwarden-cli
 
     # rather not have them global, but it simplifies some stuff for now
     nodejs
