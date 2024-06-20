@@ -56,8 +56,7 @@
     ];
 
   fonts = {
-    fontDir.enable = true;
-    fonts = [
+    packages = [
       # temporarily disabled while i try to figure out why it's seemingly outdated
       # (pkgs.nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
     ];

@@ -40,7 +40,7 @@
     rustup # :/
     # let's try some gui apps now that we're using raycast
     # github-desktop # not packaged for silicon yet
-    mpv
+    # mpv
   ];
 
   # too volatile to embed in nix configuration for now
