@@ -41,6 +41,9 @@
     # let's try some gui apps now that we're using raycast
     # github-desktop # not packaged for silicon yet
     # mpv
+
+    # install at user-level, not per-project to reduce headaches
+    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
   ];
 
   # too volatile to embed in nix configuration for now
