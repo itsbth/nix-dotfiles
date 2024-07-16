@@ -12,15 +12,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
 
     # Fix VSCode server on nixos
     vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, hyprland, ... }@inputs: {
+  outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations.nixos = import ./hosts/nixos {
-      inherit (inputs) nixpkgs home-manager hyprland vscode-server;
+      inherit (inputs) nixpkgs home-manager vscode-server;
     };
     # TODO: rename this to itsbth-mbp13 for consistency
     darwinConfigurations."itsbth-mbp13" = import ./hosts/itsbth-mbp13 {
