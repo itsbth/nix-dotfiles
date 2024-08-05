@@ -8,6 +8,8 @@ let
       inherit pname version;
       sha256 = "a530245a38969704700e0ca8f9cb7158c4ede91c5fd1e24677dbe814cf91f33b";
     };
+
+    patches = [ ./0001-migrate-to-importlib-in-setup.py.patch ];
   };
 in
 python3Packages.buildPythonApplication rec {
