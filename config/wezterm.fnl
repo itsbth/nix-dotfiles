@@ -6,5 +6,6 @@
   `(tset config ,(tostring n) ,v))
 
 (set-config font (wezterm.font "Fira Code"))
+(set-config color_scheme "Catppuccin Frappe")
 
 config

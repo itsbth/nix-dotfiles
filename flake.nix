@@ -14,7 +14,10 @@
     };
 
     # Fix VSCode server on nixos
-    vscode-server.url = "github:msteen/nixos-vscode-server";
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs: {
