@@ -168,7 +168,8 @@
 
   programs.kitty = {
     enable = true;
-    theme = "Tokyo Night";
+    # theme = "Tokyo Night";
+    themeFile = "tokyo_night_night";
     font = {
       package = pkgs.fira-code;
       name = "Fira Code";
