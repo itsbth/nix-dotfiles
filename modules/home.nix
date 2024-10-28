@@ -179,57 +179,26 @@
     settings = {
       scrollback_lines = 16384;
       notify_on_cmd_finish = "unfocused";
+      allow_remote_control = true;
     };
-    # it doesn't appear to pick the right font for symbols
-    # source: https://github.com/ryanoasis/nerd-fonts/issues/1189#issuecomment-1536112595
-    # extraConfig = ''
-    #   # Seti-UI + Custom
-    #   symbol_map U+E5FA-U+E6AC Symbols Nerd Font Mono
-    #   # Devicons
-    #   symbol_map U+E700-U+E7C5 Symbols Nerd Font Mono
-    #   # Font Awesome
-    #   symbol_map U+F000-U+F2E0 Symbols Nerd Font Mono
-    #   # Font Awesome Extension
-    #   symbol_map U+E200-U+E2A9 Symbols Nerd Font Mono
-    #   # Material Design Icons
-    #   symbol_map U+F0001-U+F1AF0 Symbols Nerd Font Mono
-    #   # Weather
-    #   symbol_map U+E300-U+E3E3 Symbols Nerd Font Mono
-    #   # Octicons
-    #   symbol_map U+F400-U+F532,U+2665,U+26A1 Symbols Nerd Font Mono
-    #   # Powerline Symbols
-    #   symbol_map U+E0A0-U+E0A2,U+E0B0-U+E0B3 Symbols Nerd Font Mono
-    #   # Powerline Extra Symbols
-    #   symbol_map U+E0A3,U+E0B4-U+E0C8,U+E0CA,U+E0CC-U+E0D4 Symbols Nerd Font Mono
-    #   # IEC Power Symbols
-    #   symbol_map U+23FB-U+23FE,U+2B58 Symbols Nerd Font Mono
-    #   # Font Logos
-    #   symbol_map U+F300-U+F32F Symbols Nerd Font Mono
-    #   # Pomicons
-    #   symbol_map U+E000-U+E00A Symbols Nerd Font Mono
-    #   # Codicons
-    #   symbol_map U+EA60-U+EBEB Symbols Nerd Font Mono
-    #   # Heavy Angle Brackets
-    #   symbol_map U+E276C-U+2771 Symbols Nerd Font Mono
-    #   # Box Drawing
-    #   symbol_map U+2500-U+259F Symbols Nerd Font Mono
-    # '';
   };
 
   programs.wezterm = {
     enable = true;
-    extraConfig = let
-      config = pkgs.stdenv.mkDerivation {
-        name = "wezterm-config";
-        buildInputs = [ pkgs.fennel ];
-        src = ../config/wezterm.fnl;
-        phases = [ "buildPhase" ];
-        buildPhase = ''
-          mkdir -p $out
-          fennel --compile --require-as-include $src > $out/wezterm.lua
-        '';
-      };
-    in "return dofile '${config}/wezterm.lua'";
+    extraConfig =
+      let
+        config = pkgs.stdenv.mkDerivation {
+          name = "wezterm-config";
+          buildInputs = [ pkgs.fennel ];
+          src = ../config/wezterm.fnl;
+          phases = [ "buildPhase" ];
+          buildPhase = ''
+            mkdir -p $out
+            fennel --compile --require-as-include $src > $out/wezterm.lua
+          '';
+        };
+      in
+      "return dofile '${config}/wezterm.lua'";
   };
 
   programs.eza = { enable = true; };
