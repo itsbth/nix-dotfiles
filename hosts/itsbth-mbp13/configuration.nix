@@ -66,8 +66,6 @@
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
   # TODO: Try git? (I, too, like to live dangerously)
   nix.package = pkgs.nixVersions.latest;
   nix.settings."extra-experimental-features" = [ "nix-command" "flakes" ];
