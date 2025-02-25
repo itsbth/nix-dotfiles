@@ -1,4 +1,13 @@
-{ pkgs, lib, config, home-manager, nix-darwin, inputs, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  home-manager,
+  nix-darwin,
+  inputs,
+  ...
+}:
+{
   home.stateVersion = "21.11";
   home.packages = with pkgs; [
     nixfmt-rfc-style
@@ -45,14 +54,12 @@
     git-absorb
 
     # install at user-level, not per-project to reduce headaches
-    (google-cloud-sdk.withExtraComponents
-      [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
   ];
 
   # too volatile to embed in nix configuration for now
   home.file.".config/nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/Code/github.com/itsbth/dotfiles/nvim/.config/nvim";
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Code/github.com/itsbth/dotfiles/nvim/.config/nvim";
   };
 
   home.sessionVariables = {
@@ -70,11 +77,18 @@
     #   enable = true;
     # };
     difftastic.enable = true;
-    ignores = [ ".vim" ".direnv" ];
-    includes = [{
-      contents = { user.email = "bth@neowit.io"; };
-      condition = "gitdir:~/Code/gitlab.com/neowit/";
-    }];
+    ignores = [
+      ".vim"
+      ".direnv"
+    ];
+    includes = [
+      {
+        contents = {
+          user.email = "bth@neowit.io";
+        };
+        condition = "gitdir:~/Code/gitlab.com/neowit/";
+      }
+    ];
     extraConfig = {
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
@@ -114,21 +128,30 @@
 
       pull.rebase = true;
       pull.ff = "only";
+
+      "tar \"tar.xz\"".command = "xz -c";
+      "tar \"tar.zst\"".command = "zstd -T0 -c";
     };
   };
 
   programs.atuin = {
     enable = true;
     flags = [ "--disable-up-arrow" ];
-    settings = { sync_address = "https://atuin.itsbth.party"; };
+    settings = {
+      sync_address = "https://atuin.itsbth.party";
+    };
   };
 
   programs.zsh = {
     enable = true;
     autocd = true;
     enableCompletion = true;
-    syntaxHighlighting = { enable = true; };
-    autosuggestion = { enable = true; };
+    syntaxHighlighting = {
+      enable = true;
+    };
+    autosuggestion = {
+      enable = true;
+    };
     shellAliases = { };
     initExtra = ''
       bindkey -e
@@ -195,7 +218,9 @@
 
   programs.starship = {
     enable = true;
-    settings = { shlvl.disabled = false; };
+    settings = {
+      shlvl.disabled = false;
+    };
   };
 
   programs.fzf = {
@@ -220,23 +245,29 @@
 
   programs.wezterm = {
     enable = true;
-    extraConfig = let
-      config = pkgs.stdenv.mkDerivation {
-        name = "wezterm-config";
-        buildInputs = [ pkgs.fennel ];
-        src = ../config/wezterm.fnl;
-        phases = [ "buildPhase" ];
-        buildPhase = ''
-          mkdir -p $out
-          fennel --compile --require-as-include $src > $out/wezterm.lua
-        '';
-      };
-    in "return dofile '${config}/wezterm.lua'";
+    extraConfig =
+      let
+        config = pkgs.stdenv.mkDerivation {
+          name = "wezterm-config";
+          buildInputs = [ pkgs.fennel ];
+          src = ../config/wezterm.fnl;
+          phases = [ "buildPhase" ];
+          buildPhase = ''
+            mkdir -p $out
+            fennel --compile --require-as-include $src > $out/wezterm.lua
+          '';
+        };
+      in
+      "return dofile '${config}/wezterm.lua'";
   };
 
-  programs.eza = { enable = true; };
+  programs.eza = {
+    enable = true;
+  };
 
-  programs.broot = { enable = true; };
+  programs.broot = {
+    enable = true;
+  };
 
   # currently broken
   manual.manpages.enable = false;
