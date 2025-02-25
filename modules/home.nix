@@ -129,8 +129,8 @@
       pull.rebase = true;
       pull.ff = "only";
 
-      "tar \"tar.xz\"".command = "xz -c";
-      "tar \"tar.zst\"".command = "zstd -T0 -c";
+      "tar \"tar.xz\"".command = "${pkgs.xz}/bin/xz -c";
+      "tar \"tar.zst\"".command = "${pkgs.zstd}/bin/zstd -T0 -c";
     };
   };
 
