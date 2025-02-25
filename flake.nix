@@ -24,10 +24,8 @@
     nixosConfigurations.nixos = import ./hosts/nixos {
       inherit (inputs) nixpkgs home-manager vscode-server;
     };
-    # TODO: rename this to itsbth-mbp13 for consistency
-    darwinConfigurations."itsbth-mbp13" = import ./hosts/itsbth-mbp13 {
-      inherit darwin home-manager nixpkgs;
-    };
+    darwinConfigurations."itsbth-mbp13" =
+      import ./hosts/itsbth-mbp13 { inherit darwin home-manager nixpkgs; };
     darwinConfigurations."itsbth-mbp16" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       # networking.hostName = "itsbth-mbp16";
@@ -40,22 +38,18 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.itsbth = {
-              imports = [ ./modules/home.nix ];
-            };
+            users.itsbth = { imports = [ ./modules/home.nix ]; };
           };
         }
         ./modules/yabai.nix
         ({ pkgs, ... }: {
-          security.pam.enableSudoTouchIdAuth = true;
+          security.pam.services.sudo_local.touchIdAuth = true;
 
           programs.gnupg.agent = {
             enable = true;
             enableSSHSupport = true;
           };
         })
-        # Breaks way too often
-        { documentation.enable = false; }
       ];
     };
   };

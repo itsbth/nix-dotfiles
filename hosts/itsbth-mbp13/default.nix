@@ -1,4 +1,5 @@
-{ darwin, home-manager, ... }: darwin.lib.darwinSystem {
+{ darwin, home-manager, ... }:
+darwin.lib.darwinSystem {
   system = "aarch64-darwin";
   modules = [
     ./configuration.nix
@@ -9,21 +10,17 @@
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        users.itsbth = {
-          imports = [ ../../modules/home.nix ];
-        };
+        users.itsbth = { imports = [ ../../modules/home.nix ]; };
       };
     }
     ../../modules/yabai.nix
     ({ pkgs, ... }: {
-      security.pam.enableSudoTouchIdAuth = true;
+      security.pam.services.sudo_local.touchIdAuth = true;
 
       programs.gnupg.agent = {
         enable = true;
         enableSSHSupport = true;
       };
     })
-    # Breaks way too often
-    { documentation.enable = false; }
   ];
 }
