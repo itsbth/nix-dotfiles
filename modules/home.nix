@@ -1,7 +1,7 @@
 { pkgs, lib, config, home-manager, nix-darwin, inputs, ... }: {
   home.stateVersion = "21.11";
   home.packages = with pkgs; [
-    nixfmt
+    nixfmt-rfc-style
 
     devbox # declarative environments
 
@@ -45,7 +45,8 @@
     git-absorb
 
     # install at user-level, not per-project to reduce headaches
-    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+    (google-cloud-sdk.withExtraComponents
+      [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
   ];
 
   # too volatile to embed in nix configuration for now
@@ -71,16 +72,48 @@
     difftastic.enable = true;
     ignores = [ ".vim" ".direnv" ];
     includes = [{
-      path = pkgs.writeText "work.inc" ''
-        [user]
-          email = bth@neowit.io
-      '';
+      contents = { user.email = "bth@neowit.io"; };
       condition = "gitdir:~/Code/gitlab.com/neowit/";
     }];
     extraConfig = {
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
+
+      column.ui = "auto";
+      branch.sort = "-committerdate";
+      tag.sort = "version:refname";
+      init.defaultBranch = "main";
+
+      diff.algorithm = "histogram";
+      diff.colorMoved = "plain";
+      diff.mnemonicPrefix = true;
+      diff.renames = true;
+
+      push.default = "simple";
       push.autoSetupRemote = true;
+      push.followTags = true;
+
+      fetch.prune = true;
+      fetch.pruneTags = true;
+      fetch.all = true;
+
+      help.autocorrect = 1;
+      commit.verbose = true;
+
+      rerere.enabled = true;
+      rerere.autoUpdate = true;
+
+      rebase.autoSquash = true;
+      rebase.autoStash = true;
+      rebase.updateRefs = true;
+
+      core.fsmonitor = true;
+      core.untrackedCache = true;
+
+      merge.conflictstyle = "zdiff3";
+
+      pull.rebase = true;
+      pull.ff = "only";
     };
   };
 
@@ -187,20 +220,18 @@
 
   programs.wezterm = {
     enable = true;
-    extraConfig =
-      let
-        config = pkgs.stdenv.mkDerivation {
-          name = "wezterm-config";
-          buildInputs = [ pkgs.fennel ];
-          src = ../config/wezterm.fnl;
-          phases = [ "buildPhase" ];
-          buildPhase = ''
-            mkdir -p $out
-            fennel --compile --require-as-include $src > $out/wezterm.lua
-          '';
-        };
-      in
-      "return dofile '${config}/wezterm.lua'";
+    extraConfig = let
+      config = pkgs.stdenv.mkDerivation {
+        name = "wezterm-config";
+        buildInputs = [ pkgs.fennel ];
+        src = ../config/wezterm.fnl;
+        phases = [ "buildPhase" ];
+        buildPhase = ''
+          mkdir -p $out
+          fennel --compile --require-as-include $src > $out/wezterm.lua
+        '';
+      };
+    in "return dofile '${config}/wezterm.lua'";
   };
 
   programs.eza = { enable = true; };
