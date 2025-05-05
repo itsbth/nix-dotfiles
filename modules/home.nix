@@ -153,7 +153,7 @@
       enable = true;
     };
     shellAliases = { };
-    initExtra = ''
+    initContent = ''
       bindkey -e
       take() { mkdir -p "$@" && cd "$@" }
 
