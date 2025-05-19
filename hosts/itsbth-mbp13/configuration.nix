@@ -5,6 +5,9 @@
     home = "/Users/itsbth";
     # desc = "Bjørn Tore Håvie";
   };
+
+  system.primaryUser = "itsbth";
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   # Put gui apps here to make them available in spotlight
