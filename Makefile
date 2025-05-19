@@ -9,6 +9,7 @@ OS := $(shell uname -s)
 # nixosConfigrations.<hostname>.conifg.system.build.toplevel on NixOS, darwinConfigurations.<hostname>.system on Darwin
 TARGET := $(if $(filter Darwin,$(OS)),darwinConfigurations.$(HOSTNAME).system,nixosConfigurations.$(HOSTNAME).config.system.build.toplevel)
 REBUILD := $(if $(filter Darwin,$(OS)),darwin-rebuild,nixos-rebuild)
+SUDO_CMD := $(if $(filter Darwin,$(OS)),sudo,)
 
 GC_MIN_AGE := 14d
 
@@ -28,7 +29,7 @@ diff: build
 	nix shell 'nixpkgs#nix-diff' -c nix-diff --color=always --skip-already-compared /var/run/current-system ./result | less -R --quit-if-one-screen
 
 switch: build
-	result/sw/bin/$(REBUILD) switch --flake .#
+	$(SUDO_CMD) result/sw/bin/$(REBUILD) switch --flake .#
 
 update:
 	nix flake update
