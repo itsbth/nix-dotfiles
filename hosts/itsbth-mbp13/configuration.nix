@@ -29,9 +29,6 @@
     # pkgs.jetbrains.fleet
     # pkgs.jetbrains.toolbox
 
-    pkgs.discord
-    # pkgs.steam
-
     pkgs.iterm2
 
     # ALL THE CONTAINERS (TODO: Trim this list)
@@ -53,9 +50,6 @@
       "idea-ultimate"
       # "fleet"
       # "toolbox"
-
-      "discord"
-      "steam"
     ];
 
   fonts = {
