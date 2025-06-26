@@ -26,31 +26,7 @@
     };
     darwinConfigurations."itsbth-mbp13" =
       import ./hosts/itsbth-mbp13 { inherit darwin home-manager nixpkgs; };
-    darwinConfigurations."itsbth-mbp16" = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      # networking.hostName = "itsbth-mbp16";
-      modules = [
-        ./hosts/itsbth-mbp13/configuration.nix
-        # { networking.hostName = "itsbth-mbp16"; }
-        ./modules/overlays.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.itsbth = { imports = [ ./modules/home.nix ]; };
-          };
-        }
-        ./modules/yabai.nix
-        ({ pkgs, ... }: {
-          security.pam.services.sudo_local.touchIdAuth = true;
-
-          programs.gnupg.agent = {
-            enable = true;
-            enableSSHSupport = true;
-          };
-        })
-      ];
-    };
+    darwinConfigurations."itsbth-mbp16" =
+      import ./hosts/itsbth-mbp16 { inherit darwin home-manager nixpkgs; };
   };
 }
