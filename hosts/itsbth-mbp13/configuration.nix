@@ -35,6 +35,7 @@
     # pkgs.podman
     pkgs.qemu # needed for podman machine
     pkgs.colima
+    (pkgs.lima.override { withAdditionalGuestAgents = true; })
     pkgs.docker-client
   ];
 
