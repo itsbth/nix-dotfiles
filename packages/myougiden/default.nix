@@ -4,17 +4,23 @@ let
     pname = "romkan";
     version = "0.2.1";
 
+    pyproject = true;
+
     src = python3Packages.fetchPypi {
       inherit pname version;
       sha256 = "a530245a38969704700e0ca8f9cb7158c4ede91c5fd1e24677dbe814cf91f33b";
     };
 
     patches = [ ./0001-migrate-to-importlib-in-setup.py.patch ];
+
+    build-system = [ python3Packages.setuptools ];
   };
 in
 python3Packages.buildPythonApplication rec {
   pname = "myougiden";
   version = "0.8.9";
+
+  pyproject = true;
 
   src = python3Packages.fetchPypi {
     inherit pname version;
@@ -23,8 +29,8 @@ python3Packages.buildPythonApplication rec {
 
   patches = [ ./001-fix-prefix.patch ];
 
-  buildInputs = [ python3Packages.setuptools ];
-  propagatedBuildInputs = [ romkan python3Packages.termcolor ];
+  build-system = [ python3Packages.setuptools ];
+  dependencies = [ romkan python3Packages.termcolor ];
 
   doCheck = false;
 
