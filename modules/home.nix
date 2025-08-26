@@ -35,7 +35,8 @@
     httpie
 
     glow
-    mdcat
+    # temporarily disabled; broken
+    # mdcat
     bat
 
     myougiden
