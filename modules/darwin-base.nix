@@ -22,7 +22,7 @@
 
     pkgs.jetbrains.goland
     pkgs.jetbrains.webstorm
-    pkgs.jetbrains.clion
+    # pkgs.jetbrains.clion
     pkgs.jetbrains.pycharm-professional
     pkgs.jetbrains.idea-ultimate
     # not currently packaged
