@@ -153,7 +153,10 @@
     autosuggestion = {
       enable = true;
     };
-    shellAliases = { };
+    shellAliases = {
+      gpcmr = "git push --set-upstream origin \"$(git-branch-current 2> /dev/null)\" -o merge_request.create";
+      gpcam = "git push --set-upstream origin \"$(git-branch-current 2> /dev/null)\" -o merge_request.create -o merge_request.auto_merge";
+    };
     initContent = ''
       bindkey -e
       take() { mkdir -p "$@" && cd "$@" }
