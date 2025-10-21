@@ -72,12 +72,6 @@
     enable = true;
     lfs.enable = true;
 
-    userName = "Bjørn Tore Håvie";
-    userEmail = "itsbth@itsbth.com";
-    # delta = {
-    #   enable = true;
-    # };
-    difftastic.enable = true;
     ignores = [
       ".vim"
       ".direnv"
@@ -90,7 +84,9 @@
         condition = "gitdir:~/Code/gitlab.com/neowit/";
       }
     ];
-    extraConfig = {
+    settings = {
+      user.name = "Bjørn Tore Håvie";
+      user.email = "itsbth@itsbth.com";
       ghq.root = "~/Code";
       url."git@github.com:itsbth/".insteadOf = "https://github.com/itsbth/";
 
@@ -133,6 +129,11 @@
       tar."tar.xz".command = "${pkgs.xz}/bin/xz -c";
       tar."tar.zst".command = "${pkgs.zstd}/bin/zstd -T0 -c";
     };
+  };
+
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
   };
 
   programs.atuin = {
