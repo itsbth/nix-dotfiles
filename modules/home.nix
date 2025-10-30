@@ -16,7 +16,7 @@
 
     # nvim + config stuff
     neovim
-    fennel
+    luaPackages.fennel
     fnlfmt
     fennel-ls
 
@@ -254,7 +254,7 @@
       let
         config = pkgs.stdenv.mkDerivation {
           name = "wezterm-config";
-          buildInputs = [ pkgs.fennel ];
+          buildInputs = [ pkgs.luaPackages.fennel ];
           src = ../config/wezterm.fnl;
           phases = [ "buildPhase" ];
           buildPhase = ''
