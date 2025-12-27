@@ -23,8 +23,8 @@
     pkgs.jetbrains.goland
     pkgs.jetbrains.webstorm
     # pkgs.jetbrains.clion
-    pkgs.jetbrains.pycharm-professional
-    pkgs.jetbrains.idea-ultimate
+    pkgs.jetbrains.pycharm
+    pkgs.jetbrains.idea
     # not currently packaged
     # pkgs.jetbrains.fleet
     # pkgs.jetbrains.toolbox
@@ -47,8 +47,8 @@
       "goland"
       "webstorm"
       "clion"
-      "pycharm-professional"
-      "idea-ultimate"
+      "pycharm"
+      "idea"
       # "fleet"
       # "toolbox"
     ];

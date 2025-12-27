@@ -168,7 +168,7 @@
 
       # utilities that are occasionally used outside of project-specific
       # environments, but I don't want globally installed
-      local to_wrap=( wget htop kubectl kubectx )
+      local to_wrap=( wget htop kubectl kubectx hyperfine )
       for cmd ( $to_wrap ); do
         if [[ $+commands[$cmd] -eq 0 ]]; then
           eval "function $cmd() { nix run nixpkgs\#$cmd -- \"\$@\"; }"
