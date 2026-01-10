@@ -180,7 +180,7 @@
       # ideally, these also defer too themself if in path, but again too much work.
       function claude() {
         local pnpx="\''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
-        \$pnpx @anthropic-ai/claude-code@latest -- "\$@"
+        $pnpx @anthropic-ai/claude-code@latest -- "\$@"
       }
       function gemini-cli() {
         local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
