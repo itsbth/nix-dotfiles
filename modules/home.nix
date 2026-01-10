@@ -175,6 +175,26 @@
         fi
       done
       unset to_wrap
+
+      # ideally i'd use the same pattern as to_wrap above, but we ended up with too many levels of escaping
+      # ideally, these also defer too themself if in path, but again too much work.
+      function claude() {
+        local pnpx="\''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
+        \$pnpx @anthropic-ai/claude-code@latest -- "\$@"
+      }
+      function gemini-cli() {
+        local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
+        $pnpx @google/gemini-cli@latest -- "$@"
+      }
+      function codex() {
+        local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
+        $pnpx @openai/codex@latest -- "$@"
+      }
+      function opencode() {
+        local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
+        $pnpx opencode-ai@latest -- "$@"
+      }
+
       # not needed with starship prompt (is there a better place to set this?)
       export VIRTUAL_ENV_DISABLE_PROMPT=1
     '';
