@@ -20,13 +20,23 @@
     };
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.nixos = import ./hosts/nixos {
-      inherit (inputs) nixpkgs home-manager vscode-server;
+  outputs =
+    {
+      self,
+      darwin,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.nixos = import ./hosts/nixos {
+        inherit (inputs) nixpkgs home-manager vscode-server;
+      };
+      darwinConfigurations."itsbth-mbp13" = import ./hosts/itsbth-mbp13 {
+        inherit darwin home-manager nixpkgs;
+      };
+      darwinConfigurations."itsbth-mbp16" = import ./hosts/itsbth-mbp16 {
+        inherit darwin home-manager nixpkgs;
+      };
     };
-    darwinConfigurations."itsbth-mbp13" =
-      import ./hosts/itsbth-mbp13 { inherit darwin home-manager nixpkgs; };
-    darwinConfigurations."itsbth-mbp16" =
-      import ./hosts/itsbth-mbp16 { inherit darwin home-manager nixpkgs; };
-  };
 }

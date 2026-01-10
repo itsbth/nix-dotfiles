@@ -30,7 +30,10 @@ python3Packages.buildPythonApplication rec {
   patches = [ ./001-fix-prefix.patch ];
 
   build-system = [ python3Packages.setuptools ];
-  dependencies = [ romkan python3Packages.termcolor ];
+  dependencies = [
+    romkan
+    python3Packages.termcolor
+  ];
 
   doCheck = false;
 

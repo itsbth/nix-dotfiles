@@ -1,22 +1,25 @@
-({ pkgs, ... }: {
-  services.yabai = {
-    enable = true;
-    package = pkgs.yabai;
-    enableScriptingAddition = true;
-    config = {
-      focus_follows_mouse = "autoraise";
-      mouse_follows_focus = "off";
-      window_placement = "second_child";
-      window_opacity = "off";
-      top_padding = 36;
-      bottom_padding = 10;
-      left_padding = 10;
-      right_padding = 10;
-      window_gap = 10;
+(
+  { pkgs, ... }:
+  {
+    services.yabai = {
+      enable = true;
+      package = pkgs.yabai;
+      enableScriptingAddition = true;
+      config = {
+        focus_follows_mouse = "autoraise";
+        mouse_follows_focus = "off";
+        window_placement = "second_child";
+        window_opacity = "off";
+        top_padding = 36;
+        bottom_padding = 10;
+        left_padding = 10;
+        right_padding = 10;
+        window_gap = 10;
+      };
     };
-  };
-  services.skhd = {
-    enable = true;
-    skhdConfig = builtins.readFile ../config/skhdrc;
-  };
-})
+    services.skhd = {
+      enable = true;
+      skhdConfig = builtins.readFile ../config/skhdrc;
+    };
+  }
+)

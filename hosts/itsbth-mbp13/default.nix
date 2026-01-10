@@ -10,7 +10,9 @@ darwin.lib.darwinSystem {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        users.itsbth = { imports = [ ../../modules/home.nix ]; };
+        users.itsbth = {
+          imports = [ ../../modules/home.nix ];
+        };
       };
     }
     ../../modules/yabai.nix

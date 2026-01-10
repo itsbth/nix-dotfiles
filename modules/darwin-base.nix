@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   users.users.itsbth = {
@@ -39,7 +44,8 @@
     pkgs.docker-client
   ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "vscode"
       "slack"
@@ -61,7 +67,10 @@
   };
 
   nix.package = pkgs.nixVersions.latest;
-  nix.settings."extra-experimental-features" = [ "nix-command" "flakes" ];
+  nix.settings."extra-experimental-features" = [
+    "nix-command"
+    "flakes"
+  ];
 
   programs.zsh.enable = true; # default shell on catalina
 

@@ -1,4 +1,9 @@
-{ self, nixpkgs, inputs, ... }:
+{
+  self,
+  nixpkgs,
+  inputs,
+  ...
+}:
 
 {
 }

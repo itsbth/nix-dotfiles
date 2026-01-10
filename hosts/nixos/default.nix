@@ -1,4 +1,5 @@
-{ nixpkgs, vscode-server, ... }: nixpkgs.lib.nixosSystem {
+{ nixpkgs, vscode-server, ... }:
+nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ./configuration.nix
@@ -8,8 +9,11 @@
     ../../modules/hyprland.nix
 
     vscode-server.nixosModule
-    ({ config, pkgs, ... }: {
-      services.vscode-server.enable = true;
-    })
+    (
+      { config, pkgs, ... }:
+      {
+        services.vscode-server.enable = true;
+      }
+    )
   ];
 }
