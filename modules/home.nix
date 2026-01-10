@@ -10,7 +10,7 @@
 {
   home.stateVersion = "21.11";
   home.packages = with pkgs; [
-    nixfmt-rfc-style
+    nixfmt
 
     devbox # declarative environments
 

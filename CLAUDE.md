@@ -68,7 +68,7 @@ make collect-garbage-home
 ### Formatting
 ```bash
 # Format Nix files
-nixfmt-rfc-style **/*.nix
+nixfmt **/*.nix
 ```
 
 ## Host Configuration
