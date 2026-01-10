@@ -179,8 +179,8 @@
       # ideally i'd use the same pattern as to_wrap above, but we ended up with too many levels of escaping
       # ideally, these also defer too themself if in path, but again too much work.
       function claude() {
-        local pnpx="\''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
-        $pnpx @anthropic-ai/claude-code@latest -- "\$@"
+        local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
+        $pnpx @anthropic-ai/claude-code@latest -- "$@"
       }
       function gemini-cli() {
         local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
