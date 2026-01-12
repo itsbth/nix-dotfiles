@@ -180,19 +180,19 @@
       # ideally, these also defer too themself if in path, but again too much work.
       function claude() {
         local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
-        $pnpx @anthropic-ai/claude-code@latest -- "$@"
+        $pnpx @anthropic-ai/claude-code@latest "$@"
       }
       function gemini-cli() {
         local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
-        $pnpx @google/gemini-cli@latest -- "$@"
+        $pnpx @google/gemini-cli@latest "$@"
       }
       function codex() {
         local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
-        $pnpx @openai/codex@latest -- "$@"
+        $pnpx @openai/codex@latest "$@"
       }
       function opencode() {
         local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
-        $pnpx opencode-ai@latest -- "$@"
+        $pnpx opencode-ai@latest "$@"
       }
 
       # not needed with starship prompt (is there a better place to set this?)
