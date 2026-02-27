@@ -25,11 +25,13 @@
 
     pkgs.nixpkgs-fmt
 
-    pkgs.jetbrains.goland
-    pkgs.jetbrains.webstorm
+    ## Sticking to toolbox for now; easier to install/uninstall; 
+    ## too large to justify keeeping always installed; #1 problematic packages
+    # pkgs.jetbrains.goland
+    # pkgs.jetbrains.webstorm
     # pkgs.jetbrains.clion
-    pkgs.jetbrains.pycharm
-    pkgs.jetbrains.idea
+    # pkgs.jetbrains.pycharm
+    # pkgs.jetbrains.idea
     # not currently packaged
     # pkgs.jetbrains.fleet
     # pkgs.jetbrains.toolbox
