@@ -56,6 +56,8 @@
 
     # install at user-level, not per-project to reduce headaches
     (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.gke-gcloud-auth-plugin ])
+
+    codex # t3code is being annoying
   ];
 
   # too volatile to embed in nix configuration for now
@@ -186,10 +188,6 @@
       function gemini-cli() {
         local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
         $pnpx @google/gemini-cli@latest "$@"
-      }
-      function codex() {
-        local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
-        $pnpx @openai/codex@latest "$@"
       }
       function opencode() {
         local pnpx="''${commands[pnpx]:-${pkgs.pnpm}/bin/pnpx}"
