@@ -9,6 +9,9 @@
 }:
 {
   home.stateVersion = "21.11";
+
+  programs.swaylock.enable = false;
+
   home.packages = with pkgs; [
     nixfmt
 
@@ -78,6 +81,7 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
+    signing.format = "ssh";
 
     ignores = [
       ".vim"
