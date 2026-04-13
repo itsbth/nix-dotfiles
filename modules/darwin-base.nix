@@ -21,7 +21,7 @@
 
     pkgs.neovim
     # pkgs.kitty
-    pkgs.vscode
+    # pkgs.vscode
 
     pkgs.nixpkgs-fmt
 
