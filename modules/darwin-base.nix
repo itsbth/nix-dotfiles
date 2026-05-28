@@ -76,5 +76,8 @@
 
   programs.zsh.enable = true; # default shell on catalina
 
-  system.stateVersion = 4;
+  # Bumped from 4; the only consequential default change in our config is the
+  # nixbld GID flip (30000 -> 350 at >=5), so pin the GID to the existing group.
+  ids.gids.nixbld = 30000;
+  system.stateVersion = 7;
 }
