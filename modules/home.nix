@@ -22,6 +22,8 @@
     luaPackages.fennel
     fnlfmt
     fennel-ls
+    # required for nvim
+    tree-sitter
 
     nixd
 
@@ -248,12 +250,15 @@
     enable = true;
     settings = {
       shlvl.disabled = false;
+      gcloud.disabled = true;
     };
   };
 
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+    # Atuin provides the Zsh Ctrl-R history search widget.
+    historyWidget.zsh.command = "";
   };
 
   programs.kitty = {
