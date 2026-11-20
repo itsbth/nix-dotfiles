@@ -253,6 +253,33 @@
     settings = {
       shlvl.disabled = false;
       gcloud.disabled = true;
+      # kubectl context, filtered/renamed via an untracked local file so that
+      # cluster names stay out of this repo. See kube-context-prompt below.
+      custom.kubectx = {
+        when = true;
+        command = "${pkgs.writeShellScript "kube-context-prompt" ''
+          # Prints the current kubectl context, or nothing to hide the module.
+          # ~/.config/starship/kube-contexts holds lines of "<glob> [label]";
+          # the first matching line wins, and a label of "-" hides the context.
+          ctx=$(${pkgs.kubectl}/bin/kubectl config current-context 2>/dev/null) || exit 0
+          label=$ctx
+          conf="''${XDG_CONFIG_HOME:-$HOME/.config}/starship/kube-contexts"
+          if [[ -r $conf ]]; then
+            while read -r pattern alias; do
+              [[ -z $pattern || $pattern == \#* ]] && continue
+              if [[ $ctx == $pattern ]]; then
+                [[ $alias == - ]] && exit 0
+                label=''${alias:-$ctx}
+                break
+              fi
+            done < "$conf"
+          fi
+          printf '%s\n' "$label"
+        ''}";
+        style = "bold blue";
+        # the optional group hides the module entirely when the output is empty
+        format = "(on [☸ $output]($style) )";
+      };
     };
   };
 
